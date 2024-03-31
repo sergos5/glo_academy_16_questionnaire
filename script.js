@@ -221,6 +221,7 @@ const clearInputForm = function () {
 	workExperienceInput.value = '';
 	workSelect.selectedIndex = 0;
 	chooseWorkDataBlock();
+	dataOutputTable.style.display = 'none';
 };
 
 const deleteWorker = function () {

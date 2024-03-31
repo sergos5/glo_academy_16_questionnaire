@@ -4,6 +4,9 @@
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
+hr{
+    margin-bottom: 20px;
+}
 section{
     margin: 20px;
 }
@@ -29,16 +32,16 @@ td{
 }
 
 select{
-    width: 150px;
+    width: 180px;
     height: 30px;
     border-color: blueviolet;
 }
 
 button {
     margin: 20px 0;
-    margin-left: 20px;
-    width: 100px;
-    height: 30px;
+    margin-left: 10px;
+    width: 120px;
+    height: 40px;
     border-radius: 5px;
     border-color:crimson;
 }
