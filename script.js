@@ -22,7 +22,11 @@ const dataOutputTable = document.querySelector('.table');
 const tableNameOutput = document.querySelector('.table-name-output');
 const tableDataOutput = document.querySelector('.table-data-output');
 
-const arrWorkers = [];
+const showWorkerSelect = document.querySelector('[name="show-worker-select"]');
+
+let dataLS = JSON.parse(localStorage.getItem('workers'));
+let arrWorkers = [];
+if (dataLS && dataLS != []) arrWorkers.push(dataLS);
 
 const arrRusName = {
 	_name: 'имя',
@@ -31,14 +35,11 @@ const arrRusName = {
 	_gender: 'пол',
 	_children: 'дети',
 	profession: 'специальность',
-	_driverCategory: 'водительское уд.',
+	_driverCategory: 'категории',
+	_сategory: 'разряд',
 	_drivingExperience: 'стаж вождения',
-	_category: 'рязряд',
 	_workExperience: 'стаж работы'
-
 };
-
-let dataLS = JSON.parse(localStorage.getItem('newWorker'));
 
 class Worker {
 	constructor(name, surName, age, gender, children) {
@@ -105,7 +106,7 @@ class Plumber extends Worker {
 	constructor(name, surName, age, gender, children, category, workExperience) {
 		super(name, surName, age, gender, children);
 		this.profession = 'слесарь';
-		this._category = category;
+		this._сategory = category;
 		this._workExperience = workExperience;
 	}
 	get сategory() {
@@ -122,7 +123,7 @@ class Plumber extends Worker {
 	}
 }
 
-workSelect.addEventListener('change', function () {
+const chooseWorkDataBlock = function () {
 	if (workSelect[workSelect.selectedIndex].value === 'driver') {
 		driverBox.style.display = 'block';
 	} else {
@@ -133,12 +134,11 @@ workSelect.addEventListener('change', function () {
 	} else {
 		plumberBox.style.display = 'none';
 	}
-});
+};
 
 saveBtn.addEventListener('click', function (event) {
 	event.preventDefault();
 	let newWorker;
-
 	if (workSelect[workSelect.selectedIndex].value === 'driver') {
 		newWorker = new Driver();
 		newWorker.drivingExperience = drivingExperienceInput.value;
@@ -155,47 +155,57 @@ saveBtn.addEventListener('click', function (event) {
 	} else {
 		newWorker = new Worker();
 	}
-
 	newWorker.name = (nameInput.value.trim() === '' ? 'нет данных' : nameInput.value);
-	newWorker.surName = surNameInput.value;
-	newWorker.age = ageInput.value;
+	newWorker.surName = (surNameInput.value.trim() === '' ? 'нет данных' : surNameInput.value);
+	newWorker.age = (ageInput.value.trim() === '' ? 'нет данных' : ageInput.value);
 	newWorker.gender = genderSelect.value;
 	newWorker.children = (childrenCheckbox.checked == false ? 'нет' : 'есть');
 
 	arrWorkers.push(newWorker);
+	localStorage.setItem('workers', JSON.stringify(arrWorkers));
 
-	localStorage.setItem('newWorker', JSON.stringify(newWorker));
-
-
-	showDataOutput();
+	addWorkerList();
 	clearInputForm();
-
-
-
 });
+
+const addWorkerList = function () {
+	dataLS = JSON.parse(localStorage.getItem('workers'));
+	showWorkerSelect.innerHTML = ' <option value="" selected>Выберите сотрудника</option>';
+	if (dataLS) {
+		dataLS.forEach((item) => {
+			const option = document.createElement('option');
+			option.innerText = item._surName;
+			option.value = item._surName;
+			showWorkerSelect.append(option);
+		});
+	}
+};
 
 const showDataOutput = function () {
 	dataOutputTable.style.display = 'block';
-	dataLS = JSON.parse(localStorage.getItem('newWorker'));
-	tableNameOutput.innerHTML = '';
-	tableDataOutput.innerHTML = '';
-
-	for (let key in dataLS) {
-		const td = document.createElement('td');
-		for (let rusName in arrRusName) {
-			if (rusName === key)
-				td.innerText = arrRusName[rusName];
-			tableNameOutput.append(td);
+	dataLS = JSON.parse(localStorage.getItem('workers'));
+	dataLS.forEach((item) => {
+		if (item._surName == showWorkerSelect[showWorkerSelect.selectedIndex].value) {
+			tableNameOutput.innerHTML = '';
+			tableDataOutput.innerHTML = '';
+			for (let key in item) {
+				const td = document.createElement('td');
+				for (let rusName in arrRusName) {
+					if (key == rusName) {
+						td.innerText = arrRusName[rusName];
+					}
+				}
+				tableNameOutput.append(td);
+			}
+			for (let key in item) {
+				const td = document.createElement('td');
+				td.innerText = item[key];
+				tableDataOutput.append(td);
+			}
 		}
-
-
-	}
-	for (let key in dataLS) {
-		const td = document.createElement('td');
-		td.innerText = dataLS[key];
-		tableDataOutput.append(td);
-	}
-}
+		if (showWorkerSelect.selectedIndex === 0) dataOutputTable.style.display = 'none';
+	});
+};
 
 const clearInputForm = function () {
 	nameInput.value = '';
@@ -209,15 +219,27 @@ const clearInputForm = function () {
 	});
 	categoryInput.value = '';
 	workExperienceInput.value = '';
+	workSelect.selectedIndex = 0;
+	chooseWorkDataBlock();
+};
+
+const deleteWorker = function () {
+	arrWorkers = [];
+	dataLS = JSON.parse(localStorage.getItem('workers'));
+	dataLS.forEach((item, index) => {
+		if (item._surName !== showWorkerSelect[showWorkerSelect.selectedIndex].value) {
+			arrWorkers.push(item);
+		}
+	})
+	//localStorage.clear();
+	localStorage.setItem('workers', JSON.stringify(arrWorkers));
+	addWorkerList();
+	dataOutputTable.style.display = 'none';
 };
 
 
-deleteBtn.addEventListener('click', () => {
-	localStorage.clear();
-	dataOutputTable.style.display = 'none';
-});
+workSelect.addEventListener('change', chooseWorkDataBlock);
+showWorkerSelect.addEventListener('change', showDataOutput);
+deleteBtn.addEventListener('click', deleteWorker);
 
-
-if (dataLS) {
-	showDataOutput();
-}
+addWorkerList();

@@ -50,8 +50,7 @@
                 </div>               
                 <input name="driving-experience" type="text"  placeholder="Введите стаж вождения">
             </div>
-            
-            
+                        
             <div class="work-data plumber-data">
                 <input name="category" type="text" placeholder="Введите разряд">
                 <input name="work-experience" type="text" placeholder="Введите стаж работы">
@@ -60,8 +59,14 @@
             <button class="button button_save" type="submit">Сохранить</button>
         </form>
         
-        
+        <div class="main_select">
+                <select name="show-worker-select" id="show-work-select">
+                    <option value="" selected>Выберите сотрудника</option>                        
+                </select>
+        </div>
+
         <div class="table table-data">
+            
             <table>
                 <tr class="table-name-output">
                     <td></td>
@@ -72,11 +77,10 @@
                         
                 </tr>                            
             </table>
+
             <button class="button button_delete">Удалить</button>
-        </div>
+        </div>      
     </section>
-
-
 
 </div>
 </body>
