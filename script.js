@@ -26,8 +26,7 @@ const showWorkerSelect = document.querySelector('[name="show-worker-select"]');
 
 let dataLS = JSON.parse(localStorage.getItem('workers'));
 let arrWorkers = [];
-if (dataLS && dataLS != []) arrWorkers.push(dataLS);
-
+if (dataLS && dataLS != []) arrWorkers = dataLS;
 const arrRusName = {
 	_name: 'имя',
 	_surName: 'фамилия',
@@ -158,10 +157,11 @@ saveBtn.addEventListener('click', function (event) {
 	newWorker.name = (nameInput.value.trim() === '' ? 'нет данных' : nameInput.value);
 	newWorker.surName = (surNameInput.value.trim() === '' ? 'нет данных' : surNameInput.value);
 	newWorker.age = (ageInput.value.trim() === '' ? 'нет данных' : ageInput.value);
-	newWorker.gender = genderSelect.value;
+	newWorker.gender = (genderSelect.value === '' ? 'еще не определился' : genderSelect.value);
 	newWorker.children = (childrenCheckbox.checked == false ? 'нет' : 'есть');
 
 	arrWorkers.push(newWorker);
+
 	localStorage.setItem('workers', JSON.stringify(arrWorkers));
 
 	addWorkerList();
