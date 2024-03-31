@@ -1,0 +1,76 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+section{
+    margin: 20px;
+}
+input{
+    display: block;
+    margin: 10px 0;
+    width: 250px;
+    height: 30px;
+    border-color: blueviolet;
+    border-radius: 5px;
+  }
+  
+table {    
+    border-collapse: collapse;    
+ }
+
+td{
+    width: 120px;
+    height: 30px;  
+    border: 1px solid grey;
+    text-align: center;  
+}
+
+select{
+    width: 150px;
+    height: 30px;
+    border-color: blueviolet;
+}
+
+button {
+    margin: 20px 0;
+    margin-left: 20px;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border-color:crimson;
+}
+
+.table{
+    display: none;
+    margin: 20px 0;
+}
+
+.children-box{
+    display: flex;
+    align-items: center;    
+}
+.children-checkbox{
+    margin: 10px;
+    width: 20px;
+}
+
+.driver-data{
+    display: none;
+}
+
+.plumber-data{
+    display: none;
+}
+
+.driver-category{   
+    display: flex;
+    align-items: center;    
+    
+}
+.driver-checkbox{
+    display: inline;
+    width: 20px;
+    margin: 10px;
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/script.js" defer></script>
+    </head>
+<body>
+
+    <section>
+        <form class="quest-form"  >
+            <input name="name" type="text" placeholder="Имя">
+            <input name="surName" type="text"  placeholder="Фамилия">
+            <input name="age" type="text" placeholder="Возраст">
+            <div class="main-controls__select">
+                <select name="gender" id="gender">
+                    <option value="" selected>Пол</option>
+                    <option value="мужской">мужской</option>
+                    <option value="женский">женский</option>
+                </select>
+            </div>
+            <div class="main-controls__checkbox children-box">Дети?            
+                <input class="children-checkbox" type="checkbox" name="children" id="children">            
+                <label for="children">(если да, поставьте галочку)</label>
+            </div>
+    
+            <div class="main-controls__select">
+                <select name="work-select" id="work-select">
+                    <option value="" selected>Специальность</option>
+                    <option value="driver">Водитель</option>
+                    <option value="plumber">Слесарь</option>
+                </select>
+            </div>
+    
+            <div class="work-data driver-data">
+                <div class="driver-category"> Выберите категории:
+                    <input class="driver-checkbox" type="checkbox" name="driver-category-choice-A" value="A" id="driver-category-A">
+                    <label for="driver-category-choice-A">A</label>
+                    <input class="driver-checkbox" type="checkbox" name="driver-category-choice-B" value="B" id="driver-category-B">
+                    <label for="driver-category-choice-B">B</label>
+                    <input class="driver-checkbox" type="checkbox" name="driver-category-choice-C" value="C" id="driver-category-C">
+                    <label for="driver-category-choice-C">C</label>
+                    <input class="driver-checkbox" type="checkbox" name="driver-category-choice-D" value="D" id="driver-category-D">
+                    <label for="driver-category-choice-D">D</label>
+                    <input class="driver-checkbox" type="checkbox" name="driver-category-choice-E" value="E" id="driver-category-E">
+                    <label for="driver-category-choice-E">E</label>
+                </div>               
+                <input name="driving-experience" type="text"  placeholder="Введите стаж вождения">
+            </div>
+            
+            
+            <div class="work-data plumber-data">
+                <input name="category" type="text" placeholder="Введите разряд">
+                <input name="work-experience" type="text" placeholder="Введите стаж работы">
+            </div>
+           
+            <button class="button button_save" type="submit">Сохранить</button>
+        </form>
+        
+        
+        <div class="table table-data">
+            <table>
+                <tr class="table-name-output">
+                    <td></td>
+                                 
+                </tr>
+                <tr class="table-data-output">
+                    <td></td>
+                        
+                </tr>                            
+            </table>
+            <button class="button button_delete">Удалить</button>
+        </div>
+    </section>
+
+
+
+</div>
+</body>
+</html>
